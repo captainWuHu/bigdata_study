@@ -7,7 +7,7 @@ object Spark01_RDD_Memory {
   def main(args: Array[String]): Unit = {
     //TODO 准备环境
     val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("RDD")
-
+    //sparkConf.set("spark.default.parallelism", "2")
 
     val sc = new SparkContext(sparkConf)
 
@@ -16,12 +16,14 @@ object Spark01_RDD_Memory {
     val seq: Seq[Int] = Seq[Int](1, 2, 3, 4)
     val rdd: RDD[Int] = sc.makeRDD(seq)
 
-    rdd.saveAsTextFile("output")
+    //将多个区域存为文件
+//    rdd.saveAsTextFile("output")
     rdd.collect().foreach(println)
 
 
     //文件中创建RDD,以行为单位
-    val data: RDD[String] = sc.textFile("datas")
+    val data: RDD[String] = sc.textFile("datas/1.txt",2)
+    data.saveAsTextFile("output")
     data.collect().foreach(println)
 
     //以文件为单位产生元组（路径，文件内容）
