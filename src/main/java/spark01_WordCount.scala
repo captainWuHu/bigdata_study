@@ -37,7 +37,6 @@ object spark01_WordCount {
     val wordCount: RDD[(String, Int)] = wordMap.reduceByKey(_ + _)
 
     val array: Array[(String, Int)] = wordCount.collect()
-    array.foreach(println)
 
     //关闭连接
 
