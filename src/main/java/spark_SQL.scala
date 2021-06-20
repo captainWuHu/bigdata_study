@@ -19,9 +19,7 @@ object spark_SQL {
 
     df.createOrReplaceTempView("user")
 
-
-    val res: DataFrame = spark.sql("select pre(age) from user")
-
+    val res: DataFrame = spark.sql("select username,age from user")
 
     res.show()
 
